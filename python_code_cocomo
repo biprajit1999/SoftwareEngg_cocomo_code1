@@ -1,0 +1,120 @@
+import math
+
+
+def LOC():
+    print("Lines Of Code\n\nComplexity\n\t1. Low press 1\n\t2. Average press 2\n\t3. High press 3")
+    Complexity = int(input("Enter Complexity = "))
+    if Complexity == 1:
+        EI = 3
+        EO = 4
+        EQ = 3
+        ILF = 7
+        EIF = 5
+    elif Complexity == 2:
+        EI = 4
+        EO = 5
+        EQ = 4
+        ILF = 10
+        EIF = 7
+    else:
+        EI = 6
+        EO = 7
+        EQ = 6
+        ILF = 15
+        EIF = 10
+    ui = int(input("User Input = "))
+    uo = int(input("User Output = "))
+    ue = int(input("User enquiry = "))
+    uf = int(input("User Files = "))
+    ei = int(input("External Interfaces = "))
+    fr = int(input("Factor Rate = "))
+    ufp = (ui*EI)+(uo*EO)+(ue*EQ)+(uf*ILF)+(ei*EIF)
+
+    sumF = 0
+    for i in range(14):
+        rate = fr
+        sumF += rate
+
+    CAF = 0.65 + (0.01 * sumF)
+    FP = ufp * CAF
+    print("Function Point Analysis:   -_-\n\n\tUnadjusted Function Points (UFP) = " + str(ufp) + "\n\tComplexity Adjustment Factor (CAF) = " + str(CAF) + "\n\tFunction Points (FP) = " + str(FP))
+
+
+def basic_cocomo():
+    print("Constructive Cost Model")
+    print("Mode Bta\n\t1. Organic press o\n\t2. Semi-detached press s\n\t3. Embedded press e\n")
+    mode = input("mode = ")
+    if mode == 'o' or mode == 'O':
+        a = 2.4
+        b = 1.05
+        c = 2.5
+        d = 0.38
+    elif mode == 's' or mode == 'S':
+        a = 3.0
+        b = 1.12
+        c = 2.5
+        d = 0.35
+    else:
+        a = 3.6
+        b = 1.20
+        c = 2.5
+        d = 0.32
+    KLOC = int(input("Enter KLOC = "))
+
+    effort = a * (KLOC**b)
+    d_time = c * (effort**d)
+    ass = effort/d_time
+    p = KLOC/effort
+
+    print("Effort =", effort, "Person-Month")
+    print("Development Time =", d_time, "Month")
+    print("Average Staff Size =", float(ass), "Persons")
+    print("Productivity =", p)
+
+
+def epl():
+    print("Estimated Programing Length")
+    n1 = int(input("n1 ="))
+    n2 = int(input("n2 ="))
+    ln_n1 = math.log(n1, 2)
+    ln_n2 = math.log(n2, 2)
+
+    N = (n1 * ln_n1) + (n2 * ln_n2)
+    print("N cap =", N)
+    print("\n________________________\n")
+    print("Estimated Programing Level")
+    l_cap = 2*n2/(n1 * N)
+    print("Estimated Programming Level is = 1/", l_cap)
+    print("\n________________________\n")
+
+
+def inter_cocomo():
+    print("Constructive Cost Model")
+    print("Mode Bta\n\t1. Organic press o\n\t2. Semi-detached press s\n\t3. Embedded press e\n")
+    mode = input("mode = ")
+    if mode == 'o' or mode == 'O':
+        a = 3.2
+        b = 1.05
+    elif mode == 's' or mode == 'S':
+        a = 3.0
+        b = 1.12
+    else:
+        a = 2.8
+        b = 1.20
+    KLOC = int(input("Enter KLOC = "))
+    EAF = int(input("EAF = "))
+    E = a * (KLOC**b) * EAF
+    print("E = ", E)
+
+
+
+print("1. Cocomo press 1\n2. InterCocomo\n3. epl press 3\n4. Line Of Code (LOC) press any Number")
+option = int(input())
+if option == 1:
+    basic_cocomo()
+elif option == 2:
+    inter_cocomo()
+elif option == 3:
+    epl()
+else:
+    LOC()
